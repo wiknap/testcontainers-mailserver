@@ -9,6 +9,8 @@ public sealed class
     MailServerBuilder : ContainerBuilder<MailServerBuilder, MailServerContainer, MailServerConfiguration>
 {
     private const string MailServerImage = "mailserver/docker-mailserver:13.3.1";
+    public const string DefaultAdminEmail = "admin@example.com";
+    public const string DefaultAdminPassword = "passwd123";
     public const ushort SmtpPort = 587;
     public const ushort ImapPort = 143;
     public const string Host = "localhost";
@@ -28,12 +30,10 @@ public sealed class
     protected override MailServerConfiguration DockerResourceConfiguration { get; }
 
     public MailServerBuilder WithAdminEmail(string adminEmail)
-        => Merge(DockerResourceConfiguration,
-            new MailServerConfiguration(adminEmail, DockerResourceConfiguration.AdminPassword));
+        => Merge(DockerResourceConfiguration, new MailServerConfiguration(adminEmail: adminEmail));
 
     public MailServerBuilder WithAdminPassword(string adminPassword)
-        => Merge(DockerResourceConfiguration,
-            new MailServerConfiguration(DockerResourceConfiguration.AdminEmail, adminPassword));
+        => Merge(DockerResourceConfiguration, new MailServerConfiguration(adminPassword: adminPassword));
 
     public override MailServerContainer Build()
     {
@@ -57,7 +57,9 @@ public sealed class
             .WithPortBinding(ImapPort, true)
             .WithPortBinding(465, true)
             .WithPortBinding(SmtpPort, true)
-            .WithPortBinding(993, true);
+            .WithPortBinding(993, true)
+            .WithAdminEmail(DefaultAdminEmail)
+            .WithAdminPassword(DefaultAdminPassword);
     }
 
     protected override MailServerBuilder Clone(IResourceConfiguration<CreateContainerParameters> resourceConfiguration)

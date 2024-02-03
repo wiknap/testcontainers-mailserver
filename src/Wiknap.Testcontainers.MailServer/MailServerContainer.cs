@@ -16,8 +16,8 @@ public sealed class MailServerContainer : DockerContainer
 
     public ushort SmtpPort => GetMappedPublicPort(MailServerBuilder.SmtpPort);
     public ushort ImapPort => GetMappedPublicPort(MailServerBuilder.ImapPort);
-    public string AdminEmail => configuration.AdminEmail;
-    public string AdminPassword => configuration.AdminPassword;
+    public string AdminEmail => configuration.AdminEmail ?? MailServerBuilder.DefaultAdminEmail;
+    public string AdminPassword => configuration.AdminPassword ?? MailServerBuilder.DefaultAdminPassword;
 
     public async Task AddEmailAsync(string email, string password, CancellationToken ct)
     {
