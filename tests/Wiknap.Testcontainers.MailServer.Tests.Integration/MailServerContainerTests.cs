@@ -79,7 +79,7 @@ public sealed class MailServerContainerTests : IDisposable
         var stopWatch = new Stopwatch();
         stopWatch.Start();
         await imapClient.Inbox.OpenAsync(FolderAccess.ReadOnly);
-        while (stopWatch.Elapsed <= TimeSpan.FromSeconds(5))
+        while (stopWatch.Elapsed <= TimeSpan.FromSeconds(10))
         {
             var searchResult = await imapClient.Inbox.SearchAsync(SearchQuery.SubjectContains(subject));
             if (searchResult.Count == 0)

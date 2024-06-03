@@ -39,14 +39,14 @@ public sealed class
     {
         Validate();
 
-        var mailHogBuilder = DockerResourceConfiguration.WaitStrategies.Count() > 1
+        var mailServerBuilder = DockerResourceConfiguration.WaitStrategies.Count() > 1
             ? this
             : WithWaitStrategy(Wait.ForUnixContainer()
                 .UntilCommandIsCompleted(MailServerSetupCommands.AddEmail(DockerResourceConfiguration.AdminEmail!,
                     DockerResourceConfiguration.AdminPassword!))
                 .UntilPortIsAvailable(SmtpPort)
                 .UntilPortIsAvailable(ImapPort));
-        return new MailServerContainer(mailHogBuilder.DockerResourceConfiguration, TestcontainersSettings.Logger);
+        return new MailServerContainer(mailServerBuilder.DockerResourceConfiguration, TestcontainersSettings.Logger);
     }
 
     protected override MailServerBuilder Init()

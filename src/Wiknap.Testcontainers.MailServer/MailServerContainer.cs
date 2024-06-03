@@ -22,7 +22,15 @@ public sealed class MailServerContainer : DockerContainer
     public async Task AddEmailAsync(string email, string password, CancellationToken ct)
     {
         await ExecAsync(MailServerSetupCommands.AddEmail(email, password), ct);
-        // Delay added, because without that server was failing. Probably setup of a new email takes some time
-        await Task.Delay(TimeSpan.FromSeconds(1), ct);
+        var now = DateTime.Now;
+        // After adding the user, we need to wait for a server to reconfigure.
+        // For now, I unfortunately didn't find other way than waiting for logs related to it
+        while (true)
+        {
+            var (stdout, _) = await GetLogsAsync(since: now.AddSeconds(1), until: DateTime.Now, ct: ct);
+
+            if (stdout.Contains(".zoo"))
+                return;
+        }
     }
 }
