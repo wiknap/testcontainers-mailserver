@@ -42,9 +42,10 @@ public sealed class
         var mailHogBuilder = DockerResourceConfiguration.WaitStrategies.Count() > 1
             ? this
             : WithWaitStrategy(Wait.ForUnixContainer()
-                .UntilCommandIsCompleted(MailServerSetupCommands.AddEmail(DockerResourceConfiguration.AdminEmail,
-                    DockerResourceConfiguration.AdminPassword))
-                .UntilPortIsAvailable(SmtpPort));
+                .UntilCommandIsCompleted(MailServerSetupCommands.AddEmail(DockerResourceConfiguration.AdminEmail!,
+                    DockerResourceConfiguration.AdminPassword!))
+                .UntilPortIsAvailable(SmtpPort)
+                .UntilPortIsAvailable(ImapPort));
         return new MailServerContainer(mailHogBuilder.DockerResourceConfiguration, TestcontainersSettings.Logger);
     }
 

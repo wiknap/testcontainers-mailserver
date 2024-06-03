@@ -10,9 +10,6 @@ namespace Wiknap.Testcontainers.MailServer.Tests.Unit;
 
 public sealed class MailServerConfigurationTests
 {
-    private const string DefaultAdminEmail = "admin@example.com";
-    private const string DefaultAdminPassword = "passwd123";
-
     [Fact]
     public void When_CreateWithDefaultConstructor_Then_ConfigInitialized()
     {

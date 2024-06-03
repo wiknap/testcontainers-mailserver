@@ -22,7 +22,7 @@ public sealed class MailServerContainer : DockerContainer
     public async Task AddEmailAsync(string email, string password, CancellationToken ct)
     {
         await ExecAsync(MailServerSetupCommands.AddEmail(email, password), ct);
-        // Delay added, because without that server was failing. Probably setup of an new email takes some time
-        await Task.Delay(TimeSpan.FromSeconds(3), ct);
+        // Delay added, because without that server was failing. Probably setup of a new email takes some time
+        await Task.Delay(TimeSpan.FromMilliseconds(750), ct);
     }
 }
