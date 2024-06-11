@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
+        <DebugType>Embedded</DebugType>
         <Description>Testcontainers for docker-mailserver</Description>
         <RepositoryUrl>https://github.com/wiknap/testcontainers-mailserver</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
