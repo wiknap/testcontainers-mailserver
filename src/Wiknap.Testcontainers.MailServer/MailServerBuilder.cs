@@ -46,7 +46,7 @@ public sealed class
                     DockerResourceConfiguration.AdminPassword!))
                 .UntilPortIsAvailable(SmtpPort)
                 .UntilPortIsAvailable(ImapPort));
-        return new MailServerContainer(mailServerBuilder.DockerResourceConfiguration, TestcontainersSettings.Logger);
+        return new MailServerContainer(mailServerBuilder.DockerResourceConfiguration);
     }
 
     protected override MailServerBuilder Init()
