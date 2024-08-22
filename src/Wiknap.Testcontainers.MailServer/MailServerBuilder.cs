@@ -8,7 +8,7 @@ namespace Wiknap.Testcontainers.MailServer;
 public sealed class
     MailServerBuilder : ContainerBuilder<MailServerBuilder, MailServerContainer, MailServerConfiguration>
 {
-    private const string MailServerImage = "mailserver/docker-mailserver:13.3.1";
+    private const string MailServerImage = "mailserver/docker-mailserver:14.0.0";
     public const string DefaultAdminEmail = "admin@example.com";
     public const string DefaultAdminPassword = "passwd123";
     public const ushort SmtpPort = 587;
