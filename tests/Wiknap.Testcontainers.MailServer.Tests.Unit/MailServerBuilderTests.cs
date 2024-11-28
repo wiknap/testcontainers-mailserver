@@ -15,8 +15,7 @@ public sealed class MailServerBuilderTests
         var container = builder.Build();
 
         // Assert
-        container.Image.Repository.ShouldBe("mailserver");
-        container.Image.Name.ShouldBe("docker-mailserver");
+        container.Image.Repository.ShouldBe("mailserver/docker-mailserver");
         container.Image.Tag.ShouldBe("14.0.0");
         container.Hostname.ShouldBe("localhost");
         container.AdminEmail.ShouldBe("admin@example.com");
@@ -29,8 +28,7 @@ public sealed class MailServerBuilderTests
         // Arrange
         const string email = "user@example.com";
         const string password = "pass321";
-        const string repo = "repo";
-        const string image = "image";
+        const string repo = "repo/image";
         const string version = "1.0";
         const string hostname = "hostname.com";
 
@@ -38,13 +36,12 @@ public sealed class MailServerBuilderTests
         var container = builder
             .WithAdminEmail(email)
             .WithAdminPassword(password)
-            .WithImage($"{repo}/{image}:{version}")
+            .WithImage($"{repo}:{version}")
             .WithHostname(hostname)
             .Build();
 
         // Assert
         container.Image.Repository.ShouldBe(repo);
-        container.Image.Name.ShouldBe(image);
         container.Image.Tag.ShouldBe(version);
         //container.Hostname.ShouldBe(hostname);
         container.AdminEmail.ShouldBe(email);
