@@ -8,7 +8,7 @@ namespace Wiknap.Testcontainers.MailServer;
 public sealed class
     MailServerBuilder : ContainerBuilder<MailServerBuilder, MailServerContainer, MailServerConfiguration>
 {
-    private const string MailServerImage = "mailserver/docker-mailserver:14.0.0";
+    private const string MailServerImage = "mailserver/docker-mailserver:15.1.0";
     public const string DefaultAdminEmail = "admin@example.com";
     public const string DefaultAdminPassword = "passwd123";
     public const ushort SmtpPort = 587;
@@ -44,8 +44,8 @@ public sealed class
             : WithWaitStrategy(Wait.ForUnixContainer()
                 .UntilCommandIsCompleted(MailServerSetupCommands.AddEmail(DockerResourceConfiguration.AdminEmail!,
                     DockerResourceConfiguration.AdminPassword!))
-                .UntilPortIsAvailable(SmtpPort)
-                .UntilPortIsAvailable(ImapPort));
+                .UntilExternalTcpPortIsAvailable(SmtpPort)
+                .UntilExternalTcpPortIsAvailable(ImapPort));
         return new MailServerContainer(mailServerBuilder.DockerResourceConfiguration);
     }
 

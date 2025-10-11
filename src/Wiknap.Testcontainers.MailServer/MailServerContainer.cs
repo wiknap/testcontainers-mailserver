@@ -7,17 +7,30 @@ namespace Wiknap.Testcontainers.MailServer;
 public sealed class MailServerContainer : DockerContainer
 {
     private readonly MailServerConfiguration configuration;
+    private readonly TimeSpan afterStartDelay;
 
     public MailServerContainer(MailServerConfiguration configuration)
+        : this(configuration, TimeSpan.FromSeconds(5))
+    {
+    }
+
+    public MailServerContainer(MailServerConfiguration configuration, TimeSpan afterStartDelay)
         : base(configuration)
     {
         this.configuration = configuration;
+        this.afterStartDelay = afterStartDelay;
     }
 
     public ushort SmtpPort => GetMappedPublicPort(MailServerBuilder.SmtpPort);
     public ushort ImapPort => GetMappedPublicPort(MailServerBuilder.ImapPort);
     public string AdminEmail => configuration.AdminEmail ?? MailServerBuilder.DefaultAdminEmail;
     public string AdminPassword => configuration.AdminPassword ?? MailServerBuilder.DefaultAdminPassword;
+
+    public override async Task StartAsync(CancellationToken ct = new())
+    {
+        await base.StartAsync(ct);
+        await Task.Delay(afterStartDelay, ct);
+    }
 
     public async Task AddEmailAsync(string email, string password, CancellationToken ct)
     {

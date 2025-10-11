@@ -16,7 +16,7 @@ public sealed class MailServerBuilderTests
 
         // Assert
         container.Image.Repository.ShouldBe("mailserver/docker-mailserver");
-        container.Image.Tag.ShouldBe("14.0.0");
+        container.Image.Tag.ShouldBe("15.1.0");
         container.Hostname.ShouldBe("localhost");
         container.AdminEmail.ShouldBe("admin@example.com");
         container.AdminPassword.ShouldBe("passwd123");
