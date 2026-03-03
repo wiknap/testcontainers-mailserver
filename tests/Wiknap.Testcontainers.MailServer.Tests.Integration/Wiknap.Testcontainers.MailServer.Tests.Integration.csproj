@@ -4,6 +4,7 @@
         <TargetFramework>net10.0</TargetFramework>
         <EnableNETAnalyzers>false</EnableNETAnalyzers>
         <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+        <NoWarn>xUnit1051</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,12 +14,13 @@
     <ItemGroup>
         <PackageReference Include="MailKit" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" />
         <PackageReference Include="Shouldly" />
-        <PackageReference Include="xunit" />
         <PackageReference Include="xunit.runner.visualstudio">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="xunit.v3"/>
     </ItemGroup>
 
 </Project>
