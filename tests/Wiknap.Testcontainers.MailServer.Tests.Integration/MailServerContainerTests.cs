@@ -78,6 +78,10 @@ public sealed class MailServerContainerTests : IDisposable
         await imapClient.AuthenticateAsync(email, password);
         var stopWatch = new Stopwatch();
         stopWatch.Start();
+
+        if (imapClient.Inbox is null)
+            return null;
+
         await imapClient.Inbox.OpenAsync(FolderAccess.ReadOnly);
         while (stopWatch.Elapsed <= TimeSpan.FromSeconds(10))
         {
