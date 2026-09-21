@@ -8,7 +8,7 @@
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.9.0"/>
         <PackageVersion Include="Microsoft.Testing.Extensions.VSTestBridge" Version="2.3.3"/>
         <PackageVersion Include="Shouldly" Version="4.3.0"/>
-        <PackageVersion Include="Testcontainers" Version="4.14.0"/>
+        <PackageVersion Include="Testcontainers" Version="4.15.0"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
